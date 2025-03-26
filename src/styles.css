@@ -1,0 +1,237 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #9423f0;
+    font-family: "Teko", sans-serif;
+    padding: 48px 64px;
+    color: white;
+}
+
+h1{
+    font-size: 50px;
+    text-transform: uppercase;
+    font-family: "Bytesized";
+    color: rgb(255, 255, 255);
+    line-height: 1;
+    
+}
+
+.hidden{
+    display:none !important;
+}
+
+/* MAIN LAYOUT */
+.header{
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    justify-content: space-between;
+}
+
+.main{
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 48px;
+}
+
+@media(max-width: 880px){
+    .main{grid-template-columns: 1fr;}
+}
+
+#root{
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+/* ELEMENTS */
+.logo{
+    gap: 9px;
+    display: flex;
+    align-items: center;
+}
+
+.logo img{
+    height: 68px;
+    width: 68px;
+}
+
+/* fact form */
+.fact-form{
+    margin-bottom: 40px;
+    background-color: #a44cec;
+    /* border: 4px solid rgb(121, 59, 172); */
+    padding: 10px 30px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-radius: 16px;
+}
+
+.fact-form input,
+.fact-form select{
+    width: 220px;
+    background-color: rgb(184, 140, 204);
+    border: none;
+    border-radius: 100px;
+    padding: 16px;
+    color: white;
+}
+
+.fact-form input::placeholder{
+    color: rgb(237, 192, 255);
+    font-family: inherit;
+}
+
+.fact-form input:first-child{
+    flex-grow: 1;
+}
+
+.fact-form span{
+    font-weight: 600;
+    font-size: 18px;
+    color: rgb(242, 227, 248);
+    margin-right: 18px;
+}
+
+@media(max-width: 950px){
+    body{
+        padding: 32px 48px;
+    }
+
+    .fact-form{
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .fact-form input,
+    .fact-form select{
+        width: auto;
+        
+    }
+}
+
+.fact{
+    font-size: 20px;
+    line-height: 1.4;
+    font-family: "Teko", sans-serif;
+    color: white;
+    background-color: #b46eee;
+    margin-bottom: 16px;
+    padding: 16px;
+    border: 4px solid rgb(126, 75, 165);
+    padding: 16px 30px;
+    border-radius: 16px;
+
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: space-between;
+}
+
+@media(max-width: 1200px){
+    .fact{
+        flex-direction: column;
+        align-items: flex-end;
+        gap:12px;
+    }
+}
+
+.tag{
+    text-transform: uppercase;
+    font-size: 14px;
+    font-family: "Bytesized", sans-serif;
+    color: rgb(255, 255, 255);
+    border-radius: 100px;
+    cursor: pointer;
+}
+
+/* buttons */
+.vote-buttons{
+    margin-left: auto;
+    flex-shrink: 0;
+
+    display: flex;
+    gap: 8px;
+}
+
+.vote-buttons button{
+    background-color: rgb(212, 176, 219);
+    border: none;
+    font-size: 15px;
+    padding: 6px 12px;
+    border-radius: 100px;
+    color: white;
+    font-family: inherit;
+    font-weight: 500;
+    transition: 0.3s;
+    
+    cursor: pointer;
+}
+
+.vote-buttons button:hover{
+    background-color: rgb(179, 151, 184);
+}
+
+.btn{
+    font-family: "Bytesized", sans-serif;
+    line-height: 1;
+    text-transform: uppercase;
+    font-size: 17px;
+    padding: 16px 0 13px;
+    background-image: linear-gradient(135deg, rgb(0, 162, 255), rgb(155, 97, 202), rgb(190, 76, 95),  rgb(218, 158, 46));
+    color: rgb(231, 219, 219);
+    transition: 0.4s; 
+    border-radius: 100px;
+    cursor: pointer;
+}
+
+.btn:hover{
+    transform: scale(110%) rotate(-2deg);
+}
+
+.btn-large{
+    font-size: 15px;
+    padding: 10px 32px 10px;
+    border: none;
+}
+
+.btn-all{
+    margin-bottom: 16px;
+    width: 100%;
+    border: none;
+    font-size: 20px;
+}
+
+.btn-category{
+    width: 100%;
+    background-image: none;
+    border: none;
+    font-size: 20px;
+}
+
+.category{ 
+    margin-bottom: 16px;
+}
+
+
+/* links */
+.source:link,
+.source:visited{
+    color: rgb(173, 36, 36);
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.source:hover,
+.source:active{
+    color: rgb(111, 0, 255);
+}
+
+/* list */
+ul{
+    list-style: none;
+}
