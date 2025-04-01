@@ -10,7 +10,7 @@ const initialFacts = [
     votesheart: 24,
     votesfrog: 9,
     voteno: 4,
-    createdIn: 2021,
+    createdIn: 2021
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ const initialFacts = [
     votesheart: 11,
     votesfrog: 2,
     voteno: 0,
-    createdIn: 2019,
+    createdIn: 2019
   },
   {
     id: 3,
@@ -31,8 +31,8 @@ const initialFacts = [
     votesheart: 8,
     votesfrog: 3,
     votesno: 1,
-    createdIn: 2015,
-  },
+    createdIn: 2015
+  }
 ];
 
 // function Counter(){
@@ -52,18 +52,19 @@ const initialFacts = [
 
 function App(){
   const [showForm, setShowForm] = useState(false);
+  const [facts, setFacts] = useState(initialFacts);
 
    return( 
     <>
       <Header showForm ={showForm} setShowForm={setShowForm}/>
     
       {/* <Counter/> */}
-      {showForm ? <NewFactForm/> : null}
+      {showForm ? <NewFactForm setFacts={setFacts} setShowForm={setShowForm}/> : null}
       
 
       <main className="main">
         <CategoryFilter/>
-        <FactList/>
+        <FactList facts={facts}/>
       </main>
     </> 
   );
@@ -95,7 +96,17 @@ const CATEGORIES = [
   { name: "news", color: "#8400ff" },
 ];
 
-function NewFactForm(){
+function isValidHttpUrl(string) {
+  let url;
+  try {
+    url = new URL(string);
+  } catch (_) {
+    return false;  
+  }
+  return url.protocol === "http:" || url.protocol === "https:";
+}
+
+function NewFactForm({ setFacts, setShowForm }){
   const [text, setText] = useState("");
   const [source, setSource] = useState("");
   const [category, setCategory] = useState("");
@@ -104,6 +115,30 @@ function NewFactForm(){
   function handleSubmit(e){
     e.preventDefault();
     console.log(text, source, category);
+
+    if(text && isValidHttpUrl(source) && category && textLength <= 200) console.log("valid data");
+
+    const newFact = {
+      id: Math.round(Math.random()*1000000),
+      text,
+      source,
+      category,
+      votesheart: 0,
+      votesfrog: 0,
+      votesno: 0,
+      createdIn: new Date().getFullYear()
+    };
+
+    //add new fact to UI
+    setFacts((facts) => [newFact, ...facts]);
+
+    //reset input fields after 'post'
+    setText("");
+    setSource("");
+    setCategory("");
+
+    //close form after 'post'
+    setShowForm(false);
   }
 
   return (
@@ -148,8 +183,7 @@ function CategoryFilter(){
   </aside>;
 }
 
-function FactList(){
-  const facts = initialFacts;
+function FactList({ facts }){
   return (
   <section>
     <ul className="facts-list">{
@@ -165,7 +199,7 @@ function Fact({ fact }){
   return (
     <li className="fact">
     <p>{fact.text} 
-        <a className="source" href={fact.source} target="_blank">(Source)</a> 
+        <a className="source" href={fact.source} target="_blank"> (Source)</a> 
     </p>
     <span className="tag" style={{
           backgroundColor: CATEGORIES.find((category) => 
