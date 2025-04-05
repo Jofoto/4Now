@@ -1,5 +1,6 @@
 import './styles.css'
-import { useState } from "react";
+import { useEffect, useState } from 'react';
+import supabase from './supabase';
 
 const initialFacts = [
   {
@@ -52,7 +53,26 @@ const initialFacts = [
 
 function App(){
   const [showForm, setShowForm] = useState(false);
-  const [facts, setFacts] = useState(initialFacts);
+  const [facts, setFacts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    async function getFacts(){
+      setIsLoading(true);
+
+      const { data: facts, error } = await supabase
+      .from('facts')
+      .select('*')
+      .order('votesheart', {ascending: false}).limit(1000);
+
+      //error handling
+      if(!error) setFacts(facts);
+      else alert('There was a problem loading data');
+
+      setIsLoading(false);
+    }
+    getFacts();
+  }, []);
 
    return( 
     <>
@@ -64,10 +84,15 @@ function App(){
 
       <main className="main">
         <CategoryFilter/>
-        <FactList facts={facts}/>
+        {isLoading ? <Loader /> :<FactList facts={facts}/>}
+        
       </main>
     </> 
   );
+}
+
+function Loader(){
+  return <p className="load">Loading...</p>
 }
 
 function Header({ showForm, setShowForm }){
@@ -75,7 +100,7 @@ function Header({ showForm, setShowForm }){
   return(
     <header className="header">
         <div className="logo">
-          <img src="logo.png"  alt="4Now Logo"/>
+          <img src="pixellogo.png"  alt="4Now Logo"/>
           <h1>{appTitle}</h1>
         </div>
         <button className="btn btn-large btn-share" 
