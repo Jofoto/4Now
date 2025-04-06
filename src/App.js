@@ -55,15 +55,19 @@ function App(){
   const [showForm, setShowForm] = useState(false);
   const [facts, setFacts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [currentCategory, setCategory] = useState("all");
 
   useEffect(() => {
     async function getFacts(){
       setIsLoading(true);
 
-      const { data: facts, error } = await supabase
-      .from('facts')
-      .select('*')
-      .order('votesheart', {ascending: false}).limit(1000);
+      let query = supabase.from('facts').select('*');
+
+      if (currentCategory !== 'all') 
+        query = query.eq('category', currentCategory);
+
+      const { data: facts, error } = await query
+        .order('votesheart', {ascending: false}).limit(1000);
 
       //error handling
       if(!error) setFacts(facts);
@@ -72,7 +76,7 @@ function App(){
       setIsLoading(false);
     }
     getFacts();
-  }, []);
+  }, [currentCategory]);
 
    return( 
     <>
@@ -83,7 +87,8 @@ function App(){
       
 
       <main className="main">
-        <CategoryFilter/>
+        <CategoryFilter setCategory = {setCategory}/>
+
         {isLoading ? <Loader /> :<FactList facts={facts}/>}
         
       </main>
@@ -92,7 +97,7 @@ function App(){
 }
 
 function Loader(){
-  return <p className="load">Loading...</p>
+  return <p className="message">Loading...</p>
 }
 
 function Header({ showForm, setShowForm }){
@@ -191,24 +196,33 @@ function NewFactForm({ setFacts, setShowForm }){
   );
 }
 
-function CategoryFilter(){
+function CategoryFilter({ setCategory }){
   return <aside>
     <ul>
       <li className="category">
-          <button className="btn btn-all">All</button>
+          <button className="btn btn-all"
+          //default, set to all categories
+          onClick={() => setCategory("all")}>All</button> 
       </li>
       {CATEGORIES.map((category) => 
         <li key={category.name} className="category">
           <button className="btn btn-category" 
+          //set to certain category
+          onClick={() => setCategory(category.name)}
             style={{backgroundColor: category.color}}>
-            {category.name}
-          </button>
+            {category.name}</button>
       </li>)}
     </ul>
   </aside>;
 }
 
 function FactList({ facts }){
+  //if there are no facts in a category
+  if(facts.length === 0)
+    return(
+      <p className="message">There are no facts in this category yet. Create the first one!🦄</p>
+    );
+
   return (
   <section>
     <ul className="facts-list">{
