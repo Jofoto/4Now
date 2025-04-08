@@ -24,7 +24,7 @@ h1{
     display:none !important;
 }
 
-.load{
+.message{
     text-align: center;
     margin-top: 24px;
 }
@@ -178,6 +178,10 @@ h1{
 }
 
 .vote-buttons button:hover{
+    background-color: rgb(179, 151, 184);
+}
+
+.vote-buttons button:disabled{
     background-color: rgb(179, 151, 184);
 }
 
