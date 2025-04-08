@@ -3,6 +3,6 @@
 ![Screenshot 2025-04-08 194828](https://github.com/user-attachments/assets/ac78e9b8-536b-4433-891e-054b16a46147)
 
 ## Tools & Technologies
-HTML, CSS, React
+JSX, CSS, React
 ## DB
 Supabase
