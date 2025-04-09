@@ -198,6 +198,7 @@ function FactList({ facts, setFacts, userVotes, setUserVotes }){
 function Fact({ fact, setFacts, userVotes, setUserVotes }){
   const [isUpdating, setIsUpdating] = useState(false);
   const userVote = userVotes[fact.id]; // 💗/🐸/👿
+  const isDisputed = fact.votesheart + fact.votesfrog < fact.votesno;
 
   async function handleVote(vote){
     if (isUpdating) return;
@@ -240,7 +241,9 @@ function Fact({ fact, setFacts, userVotes, setUserVotes }){
   
   return (
     <li className="fact">
-    <p>{fact.text} 
+    <p>
+        {isDisputed ? <span className="disputed">[🤨DISPUTED] </span> : null}
+        {fact.text} 
         <a className="source" href={fact.source} target="_blank"> (Source)</a> 
     </p>
     <span className="tag" style={{
