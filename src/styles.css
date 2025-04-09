@@ -29,6 +29,12 @@ h1{
     margin-top: 24px;
 }
 
+.disputed{
+    color: rgb(93, 1, 93);
+    font-weight: 500;
+    margin-right: 10px;
+}
+
 /* MAIN LAYOUT */
 .header{
     margin-bottom: 40px;
@@ -42,10 +48,19 @@ h1{
     display: grid;
     grid-template-columns: 250px 1fr;
     gap: 48px;
+
+    height: calc(100vh - 48px - 68px - 40px);
 }
 
 @media(max-width: 880px){
     .main{grid-template-columns: 1fr;}
+}
+
+section{
+    overflow: scroll; 
+    scrollbar-color: rgb(152, 1, 152) transparent;
+    padding-bottom: 40px;
+    
 }
 
 #root{
@@ -127,7 +142,7 @@ h1{
     background-color: #b46eee;
     margin-bottom: 16px;
     padding: 16px;
-    border: 4px solid rgb(126, 75, 165);
+    /* border: 4px solid rgb(126, 75, 165); */
     padding: 16px 30px;
     border-radius: 16px;
 
