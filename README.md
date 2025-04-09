@@ -1,8 +1,15 @@
 # 4 Now
 4 Now is a web app about uploading weird facts from various web sources. The user can also vote on already uploaded facts.
-![Screenshot 2025-04-08 194828](https://github.com/user-attachments/assets/ac78e9b8-536b-4433-891e-054b16a46147)
+![4now](https://github.com/user-attachments/assets/0bd143ad-d369-48b7-90aa-f8be4fd26e46)
 
-## Tools & Technologies
+## Fact form
+![fact-form](https://github.com/user-attachments/assets/80230649-f958-4203-acf5-e0dd14bd602f)
+
+## Disputed facts
+For questionable facts with questionable sources. 🤔
+![disputed-fact](https://github.com/user-attachments/assets/478ea67d-9868-4d2d-94bd-4ead470528ba)
+
+### Tools & Technologies
 JSX, CSS, React
-## DB
+### DB
 Supabase
